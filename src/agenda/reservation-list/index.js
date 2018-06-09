@@ -56,11 +56,14 @@ class ReactComp extends Component {
   }
 
   updateReservations(props) {
+  
     const reservations = this.getReservations(props);
     if (this.list) {
       let scrollPosition = 0;
+      debugger
       for (let i = 0; i < reservations.scrollPosition; i++) {
-        scrollPosition += this.heights[i] || 0;
+        scrollPosition += reservations.reservations[i].reservation.height || 0;
+        scrollPosition += 27.7;
       }
       this.scrollOver = false;
       this.list.scrollToOffset({offset: scrollPosition, animated: true});
@@ -103,6 +106,7 @@ class ReactComp extends Component {
   }
 
   onRowLayoutChange(ind, event) {
+    debugger
     this.heights[ind] = event.nativeEvent.layout.height;
   }
 
@@ -157,6 +161,7 @@ class ReactComp extends Component {
     Object.keys(props.reservations).forEach(key=>{
       var tempDate = XDate(key);
       if(dateutils.sameDate(props.selectedDay, tempDate)){
+        debugger
         didFindScrollPosition = true
       }
       if (!didFindScrollPosition){
